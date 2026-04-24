@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diluter 2.0</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="backdrop" aria-hidden="true"></div>
+
+    <main class="app-shell">
+      <header class="hero">
+        <p class="eyebrow">Lab Utility</p>
+        <h1>Diluter 2.0</h1>
+        <p class="subtitle">
+          Estimate dilution steps for plating 100uL samples from hemocytometer slide counts.
+        </p>
+      </header>
+
+      <section class="panel" aria-labelledby="calculator-title">
+        <h2 id="calculator-title">Dilution Calculator</h2>
+        <p class="hint">
+          Initial cells = average counted cells in one 1/25 square. Target colonies = desired colonies per plate.
+        </p>
+
+        <form id="dilution-form" novalidate>
+          <label for="initial-cells">Initial cells (per 1/25 square)</label>
+          <input
+            id="initial-cells"
+            name="initialCells"
+            type="number"
+            step="any"
+            min="0"
+            placeholder="Example: 22.5"
+            required
+          />
+
+          <label for="target-colonies">Desired colonies per plate (100uL)</label>
+          <input
+            id="target-colonies"
+            name="targetColonies"
+            type="number"
+            step="any"
+            min="0"
+            placeholder="Example: 150"
+            required
+          />
+
+          <div class="actions">
+            <button type="submit" class="btn-primary">Calculate</button>
+            <button type="reset" class="btn-ghost">Reset</button>
+          </div>
+        </form>
+
+        <p id="message" role="status" aria-live="polite"></p>
+
+        <article id="results" class="results hidden" aria-live="polite">
+          <h3>Recommended protocol</h3>
+          <dl class="metrics">
+            <div>
+              <dt>Initial cells per mL</dt>
+              <dd id="initial-cells-ml">-</dd>
+            </div>
+            <div>
+              <dt>Target cells per mL</dt>
+              <dd id="target-cells-ml">-</dd>
+            </div>
+            <div>
+              <dt>Mix for first 1mL dilution</dt>
+              <dd id="first-mix">-</dd>
+            </div>
+          </dl>
+
+          <p id="protocol-text" class="protocol"></p>
+          <p id="caution" class="caution"></p>
+        </article>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
